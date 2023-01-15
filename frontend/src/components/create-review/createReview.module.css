@@ -1,0 +1,67 @@
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.form.span{
+    display: flex;
+    align-items: start;
+}
+
+.modalButtons{
+    display: flex;
+    justify-content: center;
+}
+
+.lable{
+    width: 100%;
+}
+.input{
+    width: 100%;
+}
+
+
+.rateArea {
+    overflow: hidden;
+    width: 265px;
+    margin: 0 auto;
+}
+.rateArea:not(:checked) > input {
+    display: none;
+}
+.rateArea:not(:checked) > label {
+    float: right;
+    width: 42px;
+    padding: 0;
+    cursor: pointer;
+    font-size: 32px;
+    line-height: 32px;
+    color: lightgrey;
+    text-shadow: 1px 1px #bbb;
+}
+.rateArea:not(:checked) > label:before {
+    content: '★';
+}
+.rateArea > input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px #c60;
+}
+.rateArea:not(:checked) > label:hover,
+.rateArea:not(:checked) > label:hover ~ label {
+    color: gold;
+}
+.rateArea > input:checked + label:hover,
+.rateArea > input:checked + label:hover ~ label,
+.rateArea > input:checked ~ label:hover,
+.rateArea > input:checked ~ label:hover ~ label,
+.rateArea > label:hover ~ input:checked ~ label {
+    color: gold;
+    text-shadow: 1px 1px goldenrod;
+}
+.rateArea > label:active {
+    position: relative;
+}

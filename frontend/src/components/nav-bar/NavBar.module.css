@@ -1,0 +1,95 @@
+.wrapper {
+    height: 50px;
+}
+
+.navBar {
+    width: 100%;
+    background: blue;
+    display: inline-flex;
+    color: white;
+    justify-content: space-between;
+    position: fixed;
+    align-items: center;
+    font-family: "Segoe UI", "Helvetica Neue", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    z-index: 8;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    max-height: 5%;
+    max-width: 5%;
+}
+
+button {
+    background: white;
+    color: #333;
+    border: none;
+    height: 50%;
+}
+button:hover {
+    background: rgb(242, 242, 242);
+}
+
+button:after {
+     position: fixed;
+     top: 50px;
+     left: 0;
+     width: 100vw;
+     content: '';
+     display: block;
+     height: 2px;
+     background-color: #F2F2F2;
+ }
+
+.logo {
+    padding-left: 20px;
+}
+
+.line {
+    width: 0;
+    height: 30px;
+    border-left: 2px solid #eee;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.text {
+    padding: 0 15px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.userPanel {
+    display: flex;
+    padding-right: 8px;
+    height: 100%;
+    align-items: center;
+}
+
+.exit {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.logo{
+    cursor: pointer;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
