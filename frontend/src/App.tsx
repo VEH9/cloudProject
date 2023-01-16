@@ -4,21 +4,23 @@ import packageInfo from "../package.json";
 import "./App.css";
 import { NavBar } from "./components/nav-bar/NavBar";
 import { ReviewTable } from "./components/review-table/ReviewTable";
-import { mockRewiesList } from "./mock/mockRewies";
 import { InfoPanel } from "./components/infoPanel/InfoPanel";
+import axios, {AxiosResponse} from 'axios';
+import {TReview} from "./types/TReview";
 
 function App() {
-  let [data, setData] = useState(mockRewiesList);
-    useEffect(() => {
-        async function getGroups() {
-            const resp = await fetch('/api/info');
-            const respJson = await resp.json();
-            console.log(respJson);
-            //setGroups(respJson.groupIds);
-        }
+  let start: TReview[] = [];
+  let [data, setData] = useState<TReview[]>(start);
+  let [crutch, setCrutch] = useState(false);
+  useEffect(() => {
+    async function getGroups() {
+      await axios.get<TReview>('https://localhost:5001/api/reviews').then((resp: AxiosResponse) => {
+        setData(resp.data)
+      })
+    }
 
-        getGroups();
-    }, [])
+    getGroups().then(r => console.log("usEffect"))
+  }, [crutch])
   const appVersion = {
     version: packageInfo.version,
     replicaVersion: "Unknown",
@@ -27,9 +29,9 @@ function App() {
   useEffect(() => {
     setData(data);
   }, [data]);
-  return (
+    return (
     <>
-      <NavBar setData={setData} data={data} />
+      <NavBar setCrutch={setCrutch} crutch={crutch} />
       <InfoPanel reviewList={data} />
       <ReviewTable reviewList={data} />
       <div>{packageInfo.version}</div>

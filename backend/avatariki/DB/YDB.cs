@@ -63,7 +63,7 @@ INSERT INTO reviews (id, description, mark, userName) VALUES ($id, $description,
                         { "$id", YdbValue.MakeUint64(newId) },
                         { "$userName", YdbValue.MakeUtf8(createGuestRequest.Name) },
                         { "$description", YdbValue.MakeUtf8(createGuestRequest.Description) },
-                        { "mark", YdbValue.MakeInt32(createGuestRequest.Mark) }
+                        { "$mark", YdbValue.MakeInt32(createGuestRequest.Mark) }
                     },
                     txControl: TxControl.BeginSerializableRW().Commit()
                 );

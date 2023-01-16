@@ -2,30 +2,28 @@ import { FC, useState } from "react";
 import { Button, Modal, Input, Textarea } from "@skbkontur/react-ui";
 import style from "./createReview.module.css";
 import { TReview } from "../../types/TReview";
+import axios from "axios";
 
 type Props = {
   opened: boolean;
   close: () => void;
-  data: TReview[];
-  setData: (value: TReview[]) => void;
+  crutch: boolean;
+  setCrutch: (value: boolean) => void;
 };
 
-export const CreateReview: FC<Props> = ({ opened, close, setData, data }) => {
+export const CreateReview: FC<Props> = ({ opened, close, setCrutch, crutch }) => {
   const [name, setName] = useState("");
   const [mark, setMark] = useState(0);
   const [description, setDescription] = useState("");
 
-  const makeAnswer = () => {
+  async function makeAnswer() {
     const newReview: TReview = {
-      id: 1,
-      userName: name,
+      userName: name.replace(/ /g,'') === "" ? "Аноним": name,
       mark: mark,
-      description: description,
+      description: description.replace(/ /g,'') === "" ? "без комментариев": description,
     };
-    let copyData = data.slice();
-    copyData.push(newReview);
-    setData(copyData);
-
+    await axios.post<TReview>(`https://localhost:5001/api/reviews/reviews?Name=${newReview.userName}&Description=${newReview.description}&Mark=${newReview.mark}`)
+    setCrutch(!crutch);
     setName("");
     setMark(0);
     setDescription("");

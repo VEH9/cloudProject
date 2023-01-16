@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Avatariki.Controllers
 {
+    [Route("api/reviews")]
     public class StateController : ControllerBase
     {
         private YDB YandexDB;
@@ -20,10 +21,10 @@ namespace Avatariki.Controllers
             return await YandexDB.GetAll();
         }
 
-        [HttpPost("rewiews")]
-        public async Task<ActionResult<Reviews>> CreateGuestAsync(CreateReviews createGuestRequest)
+        [HttpPost("reviews")]
+        public async Task<ActionResult<Reviews>> CreateGuestAsync(CreateReviews createReviewRequest)
         {
-            return await YandexDB.Create(createGuestRequest);
+            return await YandexDB.Create(createReviewRequest);
         }
     }
 }

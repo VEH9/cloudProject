@@ -1,14 +1,13 @@
 import style from './NavBar.module.css'
 import {FC, useState} from "react";
 import {CreateReview} from "../create-review/createReview";
-import {TReview} from "../../types/TReview";
 
 
 type Props = {
-    setData: (value: TReview[]) => void;
-    data: TReview[];
+    setCrutch: (value: boolean) => void;
+    crutch: boolean;
 }
-export const NavBar: FC<Props> = ({setData, data}) => {
+export const NavBar: FC<Props> = ({setCrutch, crutch}) => {
     const [opened, setOpened] = useState(false);
     const openModal = () => {
         setOpened(true);
@@ -20,7 +19,7 @@ export const NavBar: FC<Props> = ({setData, data}) => {
 
     return (
         <div className={style.wrapper}>
-            <CreateReview opened={opened} close={closeModal} setData={setData} data={data}/>
+            <CreateReview opened={opened} close={closeModal} setCrutch={setCrutch} crutch={crutch}/>
             <div className={style.navBar}>
                 <div className={style.logo} >
                     <div><h2>Аватарики</h2></div>

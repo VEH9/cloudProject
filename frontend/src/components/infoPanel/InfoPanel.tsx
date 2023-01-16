@@ -7,9 +7,10 @@ type Props = {
 };
 
 export const InfoPanel: FC<Props> = ({ reviewList }) => {
-  let averageRating = (
+
+  let averageRating = reviewList.length !==0 ?(
     reviewList.reduce((sum, val) => sum + val.mark, 0) / reviewList.length
-  ).toFixed(2);
+  ).toFixed(2) : 0;
 
   return (
     <div className={style.wrapper}>
