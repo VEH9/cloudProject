@@ -12,19 +12,35 @@ function App() {
   let start: TReview[] = [];
   let [data, setData] = useState<TReview[]>(start);
   let [crutch, setCrutch] = useState(false);
+  const [versionBack, setVersionBack] = useState("Unknown");
+  const [replica, setReplica] = useState("Unknown");
   useEffect(() => {
     async function getGroups() {
-      await axios.get<TReview>('https://localhost:5001/api/reviews').then((resp: AxiosResponse) => {
+      await axios.get<TReview>('https://bba0sbdabs1tka5v68ph.containers.yandexcloud.net/api/reviews').then((resp: AxiosResponse) => {
         setData(resp.data)
       })
     }
 
-    getGroups().then(r => console.log("usEffect"))
+    getGroups().then();
   }, [crutch])
+
+  useEffect(()=> {
+    async function getVersion() {
+      await axios.get('https://bba0sbdabs1tka5v68ph.containers.yandexcloud.net/api/info/version').then((resp: AxiosResponse) => {
+        setVersionBack(resp.data)
+      })
+      await axios.get<string>('https://bba0sbdabs1tka5v68ph.containers.yandexcloud.net/api/info/host').then((resp: AxiosResponse) => {
+        setReplica(resp.data)
+      })
+    }
+
+    getVersion().then();
+  }, [])
+
   const appVersion = {
     version: packageInfo.version,
-    replicaVersion: "Unknown",
-    backendVersion: "Unknown",
+    replicaVersion: replica,
+    backendVersion: versionBack
   };
   useEffect(() => {
     setData(data);
@@ -34,7 +50,8 @@ function App() {
       <NavBar setCrutch={setCrutch} crutch={crutch} />
       <InfoPanel reviewList={data} />
       <ReviewTable reviewList={data} />
-      <div>{packageInfo.version}</div>
+      <div>Версия фронта: {appVersion.version}<br/> Версия бэка: {appVersion.backendVersion}<br/> Реплика: {appVersion.replicaVersion}
+      </div>
     </>
   );
 }

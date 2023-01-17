@@ -22,7 +22,7 @@ export const CreateReview: FC<Props> = ({ opened, close, setCrutch, crutch }) =>
       mark: mark,
       description: description.replace(/ /g,'') === "" ? "без комментариев": description,
     };
-    await axios.post<TReview>(`https://localhost:5001/api/reviews/reviews?Name=${newReview.userName}&Description=${newReview.description}&Mark=${newReview.mark}`)
+    await axios.post<TReview>(`https://bba0sbdabs1tka5v68ph.containers.yandexcloud.net/api/reviews/reviews?Name=${newReview.userName}&Description=${newReview.description}&Mark=${newReview.mark}`)
     setCrutch(!crutch);
     setName("");
     setMark(0);
